@@ -9,6 +9,7 @@ public class FoodObject {
 	}
 	private String name;
 	private String description;
+	private String imageLocation;
 	
 	public String getDescription() {
 		return description;
@@ -21,5 +22,11 @@ public class FoodObject {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public void setImageLocation(String imageLocation) {
+		this.imageLocation = imageLocation;
+	}
+	public String getImageLocation() {
+		return this.imageLocation;
 	}
 }

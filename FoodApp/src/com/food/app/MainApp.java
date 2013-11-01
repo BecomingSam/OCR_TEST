@@ -1,26 +1,26 @@
 package com.food.app;
 
-import java.util.Map;
+import java.util.Set;
 
-import com.food.foodService.FoodMockService;
 import com.food.foodService.FoodService;
+import com.food.foodService.FoodServiceMock;
 import com.food.foodService.domain.FoodObject;
-import com.food.ocr.OCRMockService;
 import com.food.ocr.OCRService;
+import com.food.ocr.OCRServiceMock;
 
 public class MainApp {
 
 	public static void main(String[] args) {
 		// OCRService service = new OCRApiService();
 
-		OCRService ocrService = new OCRMockService();
+		OCRService ocrService = new OCRServiceMock();
 		String result = ocrService.convertToText("en", "C:/test.jpg");
 
-		FoodService foodService = new FoodMockService();
-		Map<String, FoodObject> foodMap = foodService.getFoodList(result);
+		FoodService foodService = new FoodServiceMock();
+		Set<FoodObject> foodObjectSet = foodService.getFoodList(result);
 
-		for (String a : foodMap.keySet()) {
-			System.out.println(a + " " + foodMap.get(a).getDescription());
+		for (FoodObject a : foodObjectSet) {
+			System.out.println(a.getName() + " " + a.getDescription() + " " + a.getImageLocation());
 		}
 	}
 

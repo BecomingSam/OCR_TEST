@@ -1,10 +1,11 @@
-package com.food.foodService.local;
+package com.food.foodService.dictionary;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
-import com.food.foodService.FoodDictionary;
 import com.food.foodService.domain.FoodObject;
 
 public class LocalFoodDictionary implements FoodDictionary {
@@ -16,25 +17,26 @@ public class LocalFoodDictionary implements FoodDictionary {
 	Map<String, FoodObject> cachedFoodObjectMap;
 
 	protected void init() {
-
+		//TODO prepopulate cached food object map
 	}
 
 	// Testing only
 	@Override
-	public Map<String, FoodObject> lookUpFood(String name) {
-		Map<String, FoodObject> result = new HashMap<String, FoodObject>();
+	public FoodObject lookUpFood(String name) {
 		if (cachedFoodObjectMap.containsKey(name)) {
-			result.put(name, cachedFoodObjectMap.get(name));
+			return cachedFoodObjectMap.get(name);
+			//TODO: fall back to db
 		}
-		return result;
+		else return null;
 	}
 
 	@Override
-	public Map<String, FoodObject> lookUpFoodByCollection(Collection<String> names) {
-		Map<String, FoodObject> result = new HashMap<String, FoodObject>();
+	public Set<FoodObject> lookUpFoodByCollection(Collection<String> names) {
+		Set<FoodObject> result = new HashSet<FoodObject>();
 		for (String name : names) {
 			if (cachedFoodObjectMap.containsKey(name)) {
-				result.put(name, cachedFoodObjectMap.get(name));
+				result.add(cachedFoodObjectMap.get(name));
+				//TODO: fall back to db
 			}
 		}
 		return result;

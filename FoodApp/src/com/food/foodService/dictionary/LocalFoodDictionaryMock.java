@@ -1,4 +1,4 @@
-package com.food.foodService.local;
+package com.food.foodService.dictionary;
 
 import java.util.HashMap;
 import java.util.Map;

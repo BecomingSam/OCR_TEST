@@ -4,22 +4,42 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
+import com.food.constants.FoodConstants;
+import com.food.foodService.dictionary.FoodDictionary;
+import com.food.foodService.dictionary.LocalFoodDictionary;
 import com.food.foodService.domain.FoodObject;
-import com.food.utils.FoodConstants;
+import com.food.foodService.imageService.FreebaseImageService;
+import com.food.foodService.imageService.ImageService;
 
-public abstract class FoodService {
+public class FoodService {
+
+	public FoodService() {
+		this.foodDictionary = new LocalFoodDictionary();
+		this.imageService = new FreebaseImageService();
+	}
 
 	protected FoodDictionary foodDictionary;
+	protected ImageService imageService;
 	
-	public Map<String, FoodObject> getFoodList(String rawInput) {
+	public Set<FoodObject> getFoodList(String rawInput) {
 		Set<String> validFoodNames = this.filterRawInput(rawInput);
 		return this.generateFoodMap(validFoodNames);
 	}
 
-	protected abstract Map<String, FoodObject> generateFoodMap(Collection<String> validFoodNames);
+	protected Set<FoodObject> generateFoodMap(Collection<String> validFoodNames) {
+		Set<FoodObject> foodMap = this.foodDictionary.lookUpFoodByCollection(validFoodNames);
+		this.enrichFoodMapWithImage(foodMap);
+		return foodMap;
+	}
+
+	private void enrichFoodMapWithImage(Set<FoodObject> foodMap) {
+		for (FoodObject food : foodMap)
+		{
+			food.setImageLocation(this.imageService.getImageLocation(food.getName()));
+		}
+	}
 
 	protected Set<String> filterRawInput(String rawInput) {
 		Set<String> outputList = new HashSet<String>();

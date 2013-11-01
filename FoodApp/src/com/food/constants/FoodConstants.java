@@ -1,4 +1,4 @@
-package com.food.utils;
+package com.food.constants;
 
 public class FoodConstants {
 

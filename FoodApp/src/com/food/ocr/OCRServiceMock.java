@@ -1,6 +1,6 @@
 package com.food.ocr;
 
-public class OCRMockService implements OCRService {
+public class OCRServiceMock implements OCRService {
 
 	@Override
 	public String convertToText(String language, String filePath) {
