@@ -1,12 +1,10 @@
 package com.food.foodService.filter;
 
-import java.util.Map;
-
-import com.food.foodService.domain.FoodObject;
+import java.util.Set;
 
 public class CachedFoodFilter implements ValidFoodFilter {
 
-	Map<String, FoodObject> cachedFoodObjectMap;
+	protected Set<String> cachedFoodName;
 
 	public CachedFoodFilter() {
 		//TODO: some db to iniatialize
@@ -15,7 +13,7 @@ public class CachedFoodFilter implements ValidFoodFilter {
 	
 	@Override
 	public boolean isValidFood(String name) {
-		return this.cachedFoodObjectMap.containsKey(name);
+		return this.cachedFoodName.contains(name);
 	}
 
 }

@@ -2,10 +2,11 @@ package com.food.foodService.domain;
 
 public class FoodObject {
 
-	public FoodObject(String name, String description) {
+	public FoodObject(String name, String description, String imageLocation) {
 		super();
 		this.name = name;
 		this.description = description;
+		this.imageLocation = imageLocation;
 	}
 	private String name;
 	private String description;

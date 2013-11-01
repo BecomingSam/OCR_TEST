@@ -16,7 +16,7 @@ public class LocalFoodDictionaryMock extends LocalFoodDictionary {
 	private Map<String, FoodObject> getDummyFoodObjectMap() {
 		
 		Map<String, FoodObject> result = new HashMap<String, FoodObject>();
-		result.put("RAVIOLI", new FoodObject("Ravioli", "A type of Pasta"));
+		result.put("RAVIOLI", new FoodObject("RAVIOLI", "A type of Pasta", "https://usercontent.googleapis.com/freebase/v1/image/m/02nqg_h"));
 		return result;
 	}
 }
