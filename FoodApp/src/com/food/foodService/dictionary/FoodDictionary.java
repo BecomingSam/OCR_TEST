@@ -7,7 +7,6 @@ import com.food.foodService.domain.FoodObject;
 
 public interface FoodDictionary {
 	
-	public boolean isValidFood(String name);
 	public FoodObject lookUpFood(String name);
 	public Set<FoodObject> lookUpFoodByCollection(Collection<String> names);
 }

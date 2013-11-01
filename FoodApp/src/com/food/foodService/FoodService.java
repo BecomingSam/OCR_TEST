@@ -10,35 +10,27 @@ import com.food.constants.FoodConstants;
 import com.food.foodService.dictionary.FoodDictionary;
 import com.food.foodService.dictionary.LocalFoodDictionary;
 import com.food.foodService.domain.FoodObject;
-import com.food.foodService.imageService.FreebaseImageService;
-import com.food.foodService.imageService.ImageService;
+import com.food.foodService.filter.CachedFoodFilter;
+import com.food.foodService.filter.ValidFoodFilter;
 
 public class FoodService {
 
-	public FoodService() {
-		this.foodDictionary = new LocalFoodDictionary();
-		this.imageService = new FreebaseImageService();
-	}
-
+	protected ValidFoodFilter validFoodFilter;
 	protected FoodDictionary foodDictionary;
-	protected ImageService imageService;
+	
+	public FoodService() {
+		this.validFoodFilter = new CachedFoodFilter();
+		this.foodDictionary = new LocalFoodDictionary();
+	}
 	
 	public Set<FoodObject> getFoodList(String rawInput) {
 		Set<String> validFoodNames = this.filterRawInput(rawInput);
-		return this.generateFoodMap(validFoodNames);
+		return this.generateFoodObjectSet(validFoodNames);
 	}
 
-	protected Set<FoodObject> generateFoodMap(Collection<String> validFoodNames) {
-		Set<FoodObject> foodMap = this.foodDictionary.lookUpFoodByCollection(validFoodNames);
-		this.enrichFoodMapWithImage(foodMap);
-		return foodMap;
-	}
-
-	private void enrichFoodMapWithImage(Set<FoodObject> foodMap) {
-		for (FoodObject food : foodMap)
-		{
-			food.setImageLocation(this.imageService.getImageLocation(food.getName()));
-		}
+	protected Set<FoodObject> generateFoodObjectSet(Collection<String> validFoodNames) {
+		Set<FoodObject> foodObjectSet = this.foodDictionary.lookUpFoodByCollection(validFoodNames);
+		return foodObjectSet;
 	}
 
 	protected Set<String> filterRawInput(String rawInput) {
@@ -46,7 +38,7 @@ public class FoodService {
 		List<String> inputList = Arrays.asList(rawInput.split(FoodConstants.INPUT_SPLIT_REGX));
 		for (String s : inputList)
 		{
-			if (this.foodDictionary.isValidFood(s))
+			if (this.validFoodFilter.isValidFood(s))
 			{
 				outputList.add(s);
 			}

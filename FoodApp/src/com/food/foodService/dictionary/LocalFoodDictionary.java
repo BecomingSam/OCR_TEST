@@ -1,7 +1,6 @@
 package com.food.foodService.dictionary;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -40,10 +39,5 @@ public class LocalFoodDictionary implements FoodDictionary {
 			}
 		}
 		return result;
-	}
-
-	@Override
-	public boolean isValidFood(String name) {
-		return this.cachedFoodObjectMap.containsKey(name);
 	}
 }

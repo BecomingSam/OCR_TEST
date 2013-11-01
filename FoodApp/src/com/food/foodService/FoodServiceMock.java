@@ -1,7 +1,7 @@
 package com.food.foodService;
 
 import com.food.foodService.dictionary.LocalFoodDictionaryMock;
-import com.food.foodService.imageService.ImageServiceMock;
+import com.food.foodService.filter.CachedFoodFilter;
 
 public class FoodServiceMock extends FoodService {
 
@@ -9,6 +9,6 @@ public class FoodServiceMock extends FoodService {
 	{
 		super();
 		this.foodDictionary = new LocalFoodDictionaryMock();
-		this.imageService = new ImageServiceMock();
+		this.validFoodFilter = new CachedFoodFilter();
 	}
 }
