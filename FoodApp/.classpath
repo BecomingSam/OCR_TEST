@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="C:/OCR_TEST-git/ApacheLibrary/lib/httpclient-cache-4.3.1.jar"/>
 	<classpathentry kind="lib" path="C:/OCR_TEST-git/ApacheLibrary/lib/httpcore-4.3.jar"/>
 	<classpathentry kind="lib" path="C:/OCR_TEST-git/ApacheLibrary/lib/httpmime-4.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/OCR_TEST-git/freebase/google-api-services-freebase-v1-rev46-1.17.0-rc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
