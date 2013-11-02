@@ -11,6 +11,7 @@ import com.food.foodService.dictionary.FoodDictionary;
 import com.food.foodService.dictionary.LocalFoodDictionary;
 import com.food.foodService.domain.FoodObject;
 import com.food.foodService.filter.CachedFoodFilter;
+import com.food.foodService.filter.RawInputExtractor;
 import com.food.foodService.filter.ValidFoodFilter;
 
 public class FoodService {
@@ -35,7 +36,7 @@ public class FoodService {
 
 	protected Set<String> filterRawInput(String rawInput) {
 		Set<String> outputList = new HashSet<String>();
-		List<String> inputList = Arrays.asList(rawInput.split(FoodConstants.INPUT_SPLIT_REGX));
+		List<String> inputList = new RawInputExtractor().extractWordList(rawInput);
 		for (String s : inputList)
 		{
 			if (this.validFoodFilter.isValidFood(s))
@@ -45,4 +46,5 @@ public class FoodService {
 		}
 		return outputList;
 	}
+
 }
